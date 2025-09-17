@@ -1,0 +1,99 @@
+# Configuração Principal da EVA
+# Este arquivo define todos os parâmetros do sistema
+
+# Configurações de Modelos
+models:
+  mistral-7b-instruct:
+    name: "mistral-7b-instruct"
+    path: "data/models/mistral-7b-instruct-Q4_K_M.gguf"
+    context_length: 4096
+    gpu_layers: 35
+    temperature: 0.7
+    top_p: 0.9
+    top_k: 40
+    
+  ui-tars:
+    name: "ui-tars"
+    path: "data/models/UI-TARS-1.5-7B.i1-Q4_K_M.gguf"
+    context_length: 2048
+    gpu_layers: 35
+    temperature: 0.3
+    top_p: 0.8
+    top_k: 30
+    
+  mistral-3b:
+    name: "mistral-3b"
+    path: "data/models/mistral-3b-instruct-Q4_K_M.gguf"
+    context_length: 2048
+    gpu_layers: 25
+    temperature: 0.8
+    top_p: 0.9
+    top_k: 40
+
+# Configurações de Memória
+memory:
+  episodic_db_path: "data/memory/episodic.db"
+  affective_db_path: "data/memory/affective.db"
+  vector_db_path: "data/memory/vectors"
+  max_episodic_entries: 10000
+  max_affective_entries: 5000
+  embedding_model: "sentence-transformers/all-MiniLM-L6-v2"
+  consolidation_interval: 86400  # 24 horas em segundos
+  
+# Configurações de Voz
+voice:
+  whisper_model: "base"
+  tts_engine: "piper"  # ou "coqui"
+  voice_model: "pt_BR-faber-medium"
+  sample_rate: 22050
+  enable_voice: true
+  voice_activation_threshold: 0.5
+  silence_timeout: 2.0
+
+# Configurações de Hardware
+hardware:
+  target_vram_usage: 0.85  # 85% da VRAM disponível
+  cpu_threads: 4
+  gpu_device: 0
+  enable_gpu_monitoring: true
+  memory_cleanup_threshold: 0.9
+  model_switch_timeout: 30.0
+
+# Configurações Gerais
+debug_mode: false
+log_level: "INFO"
+session_timeout: 3600  # 1 hora
+auto_save_interval: 300  # 5 minutos
+max_conversation_history: 50
+enable_reflection: true
+reflection_interval: 5  # A cada 5 interações
+
+# Configurações de Interface
+interface:
+  web_port: 7860
+  enable_web_interface: true
+  enable_cli_interface: true
+  cli_prompt: "Você: "
+  eva_prompt: "EVA: "
+
+# Configurações de Personas
+personas:
+  analytical:
+    activation_threshold: 0.6
+    specialization_weight: 1.2
+    
+  creative:
+    activation_threshold: 0.5
+    specialization_weight: 1.0
+    
+  empathetic:
+    activation_threshold: 0.4  # Mais facilmente ativada
+    specialization_weight: 1.3
+    
+  executive:
+    activation_threshold: 0.7
+    specialization_weight: 1.1
+    
+  reflective:
+    activation_threshold: 0.8
+    specialization_weight: 1.0
